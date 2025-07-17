@@ -113,11 +113,13 @@ jobs:
               }'
             )
 
-            curl "${BETTERSTACK_HEARTBEAT_URL}/${EXIT_CODE}" \
+            curl \
+              --fail-with-body \
               --silent \
               --request POST \
               --header "Content-Type: application/json" \
-              --data-binary "${BETTERSTACK_METADATA_PAYLOAD}"
+              --data-binary "${BETTERSTACK_METADATA_PAYLOAD}" \
+              "${BETTERSTACK_HEARTBEAT_URL}/${EXIT_CODE}"
           fi
           exit $EXIT_CODE
 
